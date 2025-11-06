@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
+import Book from "./Book";
+
 const BookShelf = ({ title, books }) => {
-    //console.log(books);
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{title}</h2>
@@ -8,30 +10,18 @@ const BookShelf = ({ title, books }) => {
                     {books.length === 0 && <li className="no-books">No books on this shelf</li>}
                     {books.length > 0 && books.map((book) => (
                         <li key={book.id}>
-                            <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover"
-                                        style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks?.thumbnail})` }}></div>
-                                </div>
-                                {/*
-                                <div className="book-shelf-changer">
-                                    <select>
-                                        <option value="move" disabled>Move to...</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="read">Read</option>
-                                    </select>
-                                </div>
-                                */}
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors?.join(", ")}</div>
-                            </div>
+                            <Book book={book} />
                         </li>
                     ))}
                 </ol>
             </div>
         </div>
     );
+};
+
+BookShelf.propTypes = {
+    title: PropTypes.string.isRequired,
+    books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default BookShelf;
