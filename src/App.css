@@ -122,6 +122,12 @@ body,
   text-align: left;
 }
 
+.no-books {
+  font-size: 1.2em;
+  color: #999;
+  margin-top: 20px;
+}
+
 .book {
   width: 140px;
 }
