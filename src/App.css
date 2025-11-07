@@ -11,6 +11,23 @@ body,
   background: white;
 }
 
+.loader-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 2em;
+}
+
+.loader {
+  color: #2e7c31;
+}
+
+.error {
+  color: #f44336;
+}
+
 /* main page */
 
 .list-books-title {

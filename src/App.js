@@ -1,20 +1,28 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 import BookShelf from "./BookShelf";
+import { BookshelvesContext } from "./BookshelvesContext";
 
 function App() {
   // State to store the books data
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch books data from API
+  // Fetch books data from API on component mount
   useEffect(() => {
-    BooksAPI.getAll().then((books) => {
+    BooksAPI.getAll().then(async (books) => {
       setBooks(books);
+      setLoading(false);
+    }).catch((error) => {
+      setError(error);
+      setLoading(false);
     });
   }, []);
 
-  // Set up bookshelves so it only re-renders when the books change
+  // Set up bookshelves to only re-render when books change
+  // https://react.dev/reference/react/useMemo
   const bookshelves = useMemo(() => [
     {
       id: "currentlyReading",
@@ -33,15 +41,51 @@ function App() {
     },
   ], [books]);
 
+  // Handle changing the shelf of a book
+  const handleChangeShelf = useCallback((book, newShelf) => {
+    // Update book's shelf via API
+    BooksAPI.update(book, newShelf).then(() => {
+      // Update book's shelf in local state
+      // Use the updater function of useState so this handler never re-renders since we have no dependencies
+      // https://react.dev/reference/react/useState#updating-state-based-on-the-previous-state
+      setBooks((prevBooks) => prevBooks.map((b) => b.id === book.id ? { ...b, shelf: newShelf } : b));
+    });
+  }, []);
+
+  // Create bookshelves context and only re-render when bookshelves change
+  const bookshelvesContextValue = useMemo(() => ({
+    bookshelves,
+    handleChangeShelf,
+  }), [bookshelves, handleChangeShelf]);
+
   return (
-    < div className="app" >
-      <div className="list-books-title"><h1>MyReads</h1></div>
-      <div className="list-books-content">
-        {bookshelves.map((bookshelf) => (
-          <BookShelf key={bookshelf.id} title={bookshelf.title} books={bookshelf.books} />
-        ))}
+    <div className="app">
+      <div className="list-books-title">
+        <h1>MyReads</h1>
       </div>
-    </div >
+
+      {loading && !error && (
+        <div className="loader-container">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
+
+      {error && (
+        <div className="error-container">
+          <div className="error">Error: {error.message}</div>
+        </div>
+      )}
+
+      {!loading && !error && (
+        <BookshelvesContext value={bookshelvesContextValue}>
+          <div className="list-books-content">
+            {bookshelves.map((bookshelf) => (
+              <BookShelf key={bookshelf.id} title={bookshelf.title} books={bookshelf.books} />
+            ))}
+          </div>
+        </BookshelvesContext>
+      )}
+    </div>
   );
 }
 
