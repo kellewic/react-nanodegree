@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import * as BooksAPI from "./BooksAPI";
-import "./App.css";
 import BookShelf from "./BookShelf";
 import { BookshelvesContext } from "./BookshelvesContext";
+import "./App.css";
 
 function App() {
   // State to store the books data
@@ -12,7 +12,7 @@ function App() {
 
   // Fetch books data from API on component mount
   useEffect(() => {
-    BooksAPI.getAll().then(async (books) => {
+    BooksAPI.getAll().then((books) => {
       setBooks(books);
       setLoading(false);
     }).catch((error) => {
