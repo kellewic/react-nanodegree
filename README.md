@@ -1,35 +1,86 @@
-# [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019)
+# MyReads - Book Tracking App
 
-From Udacity's website:
+A bookshelf application that allows you to organize books into three categories: Currently Reading, Want to Read, and Read. Built as part of the [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019) program final project.
 
-> React is completely transforming the Front-End Development landscape. Come master this powerful UI library, and learn career-ready skills with Udacity. You'll learn how to build declarative user interfaces for the web with React, and for iOS and Android with React Native. You'll also learn how to manage state more predictably in your applications with Redux.
+## Overview
 
-- **Intermediate** - 39 hours
-- **6 courses** - 30 lessons, 3 projects
+MyReads provides an intuitive interface to manage your reading list. Search for books, categorize them into shelves, and track your reading progress all in one place.
 
-## Project
+## Features
 
-Create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that you will use to persist information as you interact with the application.
+- Organize books into "Currently Reading", "Want to Read", and "Read" categories
+- Search for books by title with real-time results
+- Optimized search with debouncing to reduce unnecessary API calls
+- Book selections are saved and synchronized across the app
+- Visual feedback during data fetching
+- Error messages for better user experience
 
-### App Functionality
+## Installation
 
-In this application, the main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. The three shelves are:
+### Steps
 
-- Currently Reading
-- Want to Read
-- Read
+**Clone the repository** (or download the project files)
 
-Each book has a control that lets you select the shelf for that book. When you select a different shelf, the book moves there. Note that the default value for the control should always be the current shelf the book is in.
+```
+git clone <repository-url>
+cd react-nanodegree
+```
 
-The main page also has a link to /search, a search page that allows you to find books to add to your library.
+**Install dependencies**
 
-The search page has a text input that may be used to find books. As the value of the text input changes, the books that match that query are displayed on the page, along with a control that lets you add the book to your library. To keep the interface consistent, you may consider re-using some of the code you used to display the books on the main page.
+```
+npm install
+```
 
-When a book is on a bookshelf, it should have the same state on both the main application page and the search page.
+## Running the Application
 
-The search page also has a link to / (the root URL), which leads back to the main page.
+### Development Mode
 
-When you navigate back to the main page from the search page, you should instantly see all of the selections you made on the search page in your library.
+To run the app in development mode with hot reload:
 
-**Considerations**
-The focus of this project is on writing functional React code, not on making the page beautiful. Feel free to spend some time working on your layout and CSS if you want to, but the goal for this project is correct functionality.
+```
+npm run dev
+```
+
+The application will open at [http://localhost:3001](http://localhost:3001)
+
+### Production Mode
+
+To build and run the production version:
+
+```
+npm start
+```
+
+The application will be available at [http://localhost:3001](http://localhost:3001)
+
+### Build Only
+
+To create a production build without running:
+
+```
+npm run build
+```
+
+## How to Use
+
+1. **Main Page**: View your books organized into three shelves
+2. **Move Books**: Use the dropdown menu on each book to change its shelf
+3. **Search Books**: Click the "+" button or navigate to /search
+4. **Add Books**: Search for books and add them to a shelf using the dropdown
+5. **Return Home**: Click "Home" (upper-right back arrow) to return to main bookshelf view or navigate to /
+
+## Implementation Notes
+
+- Search queries are debounced with a 500ms delay to optimize API calls
+- Books added in search appear immediately on the main page
+- Uses React Context for global state management (loading, error, and bookshelves)
+- Search results correctly show the shelf status for books already in your library
+
+## API Backend
+
+The project uses a backend API provided by Udacity for book data and persistence. The API is accessed through the `BooksAPI.js` utility module.
+
+## License
+
+This project was created for educational purposes as part of Udacity's React Nanodegree program.
