@@ -21,6 +21,9 @@ function Search() {
     const [query, setQuery] = useState("");
     // Filtered books are books that match the query from the search API
     const [filteredBooks, setFilteredBooks] = useState([]);
+    // Track if search is in progress
+    // Needed so "No books found..." text doesn't display when search in progress
+    const [isSearching, setIsSearching] = useState(false);
 
     const { loading, error } = useContext(AppContext);
     const { books, handleChangeShelf } = useContext(BookshelvesContext);
@@ -57,8 +60,11 @@ function Search() {
     useEffect(() => {
         if (!query) {
             setFilteredBooks([]);
+            setIsSearching(false);
             return;
         }
+
+        setIsSearching(true);
         BooksAPI.search(query, 100).then((books) => {
             // Check if response is an array (success) or an object with error
             if (Array.isArray(books)) {
@@ -70,6 +76,8 @@ function Search() {
             }
         }).catch((error) => {
             setFilteredBooks([]);
+        }).finally(() => {
+            setIsSearching(false);
         });
     }, [query, setFilteredBooks]);
 
@@ -95,7 +103,7 @@ function Search() {
                         <div className="search-initial-text">Use the search box to find books</div>
                     </div>
                 )}
-                {query && filteredBooks.length === 0 && (
+                {query && !isSearching && filteredBooks.length === 0 && (
                     <div className="search-no-results-container">
                         <div className="search-no-results-text">
                             <span>No books found when searching for </span>
