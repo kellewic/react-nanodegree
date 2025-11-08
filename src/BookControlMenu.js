@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { BookshelvesContext } from "./BookshelvesContext";
+import { SHELVES, BookshelvesContext } from "./BookshelvesContext";
 
 /**
  * Displays control menu to move book to a different shelf
@@ -14,10 +14,10 @@ const BookControlMenu = ({ book }) => {
             <select value={book.shelf || "none"} onChange={(e) => handleChangeShelf(book, e.target.value)}>
                 <option value="move" disabled>Move to...</option>
                 {book?.shelf &&
-                    <option className="book-shelf-changer-remove" value="remove">Remove from shelf</option>
+                    <option className="book-shelf-changer-remove" value={SHELVES.REMOVE}>Remove from shelf</option>
                 }
                 {!book?.shelf &&
-                    <option value="none">None</option>
+                    <option value={SHELVES.NONE}>None</option>
                 }
                 {bookshelves.map((bookshelf) => (
                     <option key={bookshelf.id} value={bookshelf.id}>{bookshelf.title}</option>

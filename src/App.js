@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import { AppContext } from "./AppContext";
-import { BookshelvesContext } from "./BookshelvesContext";
+import { SHELVES, SHELF_CONFIG, BookshelvesContext } from "./BookshelvesContext";
 import Home from "./Home";
 import Search from "./Search";
 import "./App.css";
@@ -37,23 +37,10 @@ function App() {
   // Set up bookshelves to only re-render when books change
   // Reference: https://react.dev/reference/react/useMemo
   const bookshelves = useMemo(() => {
-    return [
-      {
-        id: "currentlyReading",
-        title: "Currently Reading",
-        books: books.filter((book) => book.shelf === "currentlyReading"),
-      },
-      {
-        id: "wantToRead",
-        title: "Want To Read",
-        books: books.filter((book) => book.shelf === "wantToRead"),
-      },
-      {
-        id: "read",
-        title: "Read",
-        books: books.filter((book) => book.shelf === "read"),
-      },
-    ];
+    return SHELF_CONFIG.map((shelf) => ({
+      ...shelf,
+      books: books.filter((book) => book.shelf === shelf.id),
+    }));
   }, [books]);
 
   // Handle changing the shelf of a book
@@ -66,7 +53,7 @@ function App() {
       setBooks((prevBooks) => {
         const bookExists = prevBooks.some((b) => b.id === book.id);
 
-        if (newShelf === "remove") {
+        if (newShelf === SHELVES.REMOVE) {
           return prevBooks.filter((b) => b.id !== book.id);
         }
         else if (bookExists) {
