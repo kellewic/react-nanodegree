@@ -100,7 +100,7 @@ function App() {
     <AppContext value={appContextValue}>
       <BookshelvesContext value={bookshelvesContextValue}>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </BookshelvesContext>

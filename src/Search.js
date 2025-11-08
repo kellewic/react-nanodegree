@@ -45,7 +45,7 @@ function Search() {
     // Update query after a delay to prevent unnecessary re-renders
     useEffect(() => {
         const timerId = setTimeout(() => {
-            setQuery(prevQuery => prevQuery === inputValue ? prevQuery : inputValue);
+            setQuery(inputValue);
         }, 500);
 
         return () => clearTimeout(timerId);
@@ -64,8 +64,11 @@ function Search() {
             return;
         }
 
+        let cancelled = false;
         setIsSearching(true);
+
         BooksAPI.search(query, 100).then((books) => {
+            if (cancelled) return;
             // Check if response is an array (success) or an object with error
             if (Array.isArray(books)) {
                 setFilteredBooks(books);
@@ -75,10 +78,16 @@ function Search() {
                 setFilteredBooks([]);
             }
         }).catch((error) => {
+            if (cancelled) return;
             setFilteredBooks([]);
         }).finally(() => {
+            if (cancelled) return;
             setIsSearching(false);
         });
+
+        return () => {
+            cancelled = true;
+        };
     }, [query, setFilteredBooks]);
 
     // Changed the placeholder text to only display "Search by title" since the API only searches by title

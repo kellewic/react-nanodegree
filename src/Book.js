@@ -12,7 +12,13 @@ const Book = ({ book }) => {
         <div className="book">
             <div className="book-top">
                 <div className="book-cover"
-                    style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks?.thumbnail})` }}></div>
+                    style={{
+                        width: 128,
+                        height: 193,
+                        backgroundImage: book.imageLinks?.thumbnail ?
+                            `url(${book.imageLinks?.thumbnail})` :
+                            "none"
+                    }}></div>
                 <BookControlMenu book={book} />
             </div>
             <div className="book-title">{bookTitle}</div>

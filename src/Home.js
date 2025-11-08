@@ -8,7 +8,7 @@ import BookShelf from "./BookShelf";
 
 function Home() {
     const { loading, error } = useContext(AppContext);
-    const { bookshelves, handleChangeShelf } = useContext(BookshelvesContext);
+    const { bookshelves } = useContext(BookshelvesContext);
 
     return (
         <div className="app">
