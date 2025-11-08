@@ -1,4 +1,4 @@
-/*
+/**
     Rather than deal with messy props drilling, use the Context API to pass app data down to components.
 
     References:

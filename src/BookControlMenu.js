@@ -2,6 +2,10 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { BookshelvesContext } from "./BookshelvesContext";
 
+/**
+ * Displays control menu to move book to a different shelf
+ * @param {Object} book - Book to display
+ */
 const BookControlMenu = ({ book }) => {
     const { bookshelves, handleChangeShelf } = useContext(BookshelvesContext);
 

@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import BookControlMenu from "./BookControlMenu";
 
+/**
+ * Displays book with title, subtitle, and authors along with a control menu to move the book to a different shelf
+ * @param {Object} book - Book to display
+ */
 const Book = ({ book }) => {
     const bookTitle = book.subtitle ? `${book.title}: ${book.subtitle}` : book.title;
 
