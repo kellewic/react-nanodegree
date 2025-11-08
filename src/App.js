@@ -58,12 +58,28 @@ function App() {
 
   // Handle changing the shelf of a book
   const handleChangeShelf = useCallback((book, newShelf) => {
+    console.log("handleChangeShelf", "Title: ", book.title, ", Shelf: ", book.shelf, ", New Shelf: ", newShelf);
+
     // Update book's shelf via API
     BooksAPI.update(book, newShelf).then(() => {
       // Update book's shelf in local state
       // Use the updater function of useState so this handler never re-renders since we have no dependencies
       // Reference: https://react.dev/reference/react/useState#updating-state-based-on-the-previous-state
-      setBooks((prevBooks) => prevBooks.map((b) => b.id === book.id ? { ...b, shelf: newShelf } : b));
+      setBooks((prevBooks) => {
+        const bookExists = prevBooks.some((b) => b.id === book.id);
+
+        if (newShelf === "remove") {
+          return prevBooks.filter((b) => b.id !== book.id);
+        }
+        else if (bookExists) {
+          return prevBooks.map((b) => b.id === book.id ? { ...b, shelf: newShelf } : b);
+        }
+        else {
+          return [...prevBooks, { ...book, shelf: newShelf }];
+        }
+      });
+
+      console.log("books", book, book.shelf);
     });
   }, []);
 

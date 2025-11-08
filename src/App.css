@@ -13,7 +13,8 @@ body,
 
 .loader-container,
 .error-container,
-.search-initial-container {
+.search-initial-container,
+.search-no-results-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +32,18 @@ body,
 
 .search-initial-text {
   color: #999;
+}
+
+.search-no-results-text {
+  color: #999;
+}
+
+.search-no-results-query {
+  color: #2e7c31;
+}
+
+.book-shelf-changer-remove {
+  color: #f44336;
 }
 
 /* main page */

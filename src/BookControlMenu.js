@@ -11,8 +11,14 @@ const BookControlMenu = ({ book }) => {
 
     return (
         <div className="book-shelf-changer">
-            <select value={book.shelf} onChange={(e) => handleChangeShelf(book, e.target.value)}>
+            <select value={book.shelf || "none"} onChange={(e) => handleChangeShelf(book, e.target.value)}>
                 <option value="move" disabled>Move to...</option>
+                {book?.shelf &&
+                    <option className="book-shelf-changer-remove" value="remove">Remove from shelf</option>
+                }
+                {!book?.shelf &&
+                    <option value="none">None</option>
+                }
                 {bookshelves.map((bookshelf) => (
                     <option key={bookshelf.id} value={bookshelf.id}>{bookshelf.title}</option>
                 ))}
