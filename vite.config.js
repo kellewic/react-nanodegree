@@ -4,7 +4,21 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ['babel-plugin-react-compiler', {
+            logger: {
+              logEvent(filename, event) {
+                console.log(`[Compiler] ${event.kind}: ${filename}`);
+              }
+            }
+          }]
+        ],
+      },
+    }),
+  ],
   // Use relative paths instead of absolute
   root: process.cwd(),
   base: "./",
