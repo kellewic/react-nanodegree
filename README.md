@@ -76,6 +76,8 @@ npm run build
 - Books added in search appear immediately on the main page
 - Uses React Context for global state management (loading, error, and bookshelves)
 - Search results correctly show the shelf status for books already in your library
+- [React Compiler](https://react.dev/learn/react-compiler) used for automatic component memoization, combined with manual `useMemo`/`useCallback` optimization for critical state management functions
+- Constants are exported from context files to avoid magic strings and improve maintainability
 
 ## API Backend
 
