@@ -1,8 +1,10 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
-import BookShelf from "./BookShelf";
+import { AppContext } from "./AppContext";
 import { BookshelvesContext } from "./BookshelvesContext";
+import Home from "./Home";
+import Search from "./Search";
 import "./App.css";
 
 function App() {
@@ -55,42 +57,26 @@ function App() {
 
   // Create bookshelves context and only re-render when bookshelves change
   const bookshelvesContextValue = useMemo(() => ({
+    books,
     bookshelves,
     handleChangeShelf,
-  }), [bookshelves, handleChangeShelf]);
+  }), [books, bookshelves, handleChangeShelf]);
+
+  // Create app context and only re-render when loading or error change
+  const appContextValue = useMemo(() => ({
+    loading,
+    error,
+  }), [loading, error]);
 
   return (
-    <div className="app">
-      <div className="list-books-title">
-        <h1>MyReads</h1>
-      </div>
-
-      {loading && !error && (
-        <div className="loader-container">
-          <div className="loader">Loading...</div>
-        </div>
-      )}
-
-      {error && (
-        <div className="error-container">
-          <div className="error">Error: {error.message}</div>
-        </div>
-      )}
-
-      {!loading && !error && (
-        <BookshelvesContext value={bookshelvesContextValue}>
-          <div className="list-books-content">
-            {bookshelves.map((bookshelf) => (
-              <BookShelf key={bookshelf.id} title={bookshelf.title} books={bookshelf.books} />
-            ))}
-          </div>
-        </BookshelvesContext>
-      )}
-
-      <div className="open-search">
-        <Link to="/search" title="Search for books" aria-label="Search for books">Search</Link>
-      </div>
-    </div>
+    <AppContext value={appContextValue}>
+      <BookshelvesContext value={bookshelvesContextValue}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </BookshelvesContext>
+    </AppContext>
   );
 }
 

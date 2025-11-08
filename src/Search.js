@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "./AppContext";
+import { BookshelvesContext } from "./BookshelvesContext";
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorMessage from "./ErrorMessage";
 
 function Search() {
     const [query, setQuery] = useState("");
+    const { loading, error } = useContext(AppContext);
+    const { bookshelves, handleChangeShelf } = useContext(BookshelvesContext);
 
     return (
         <div className="search-books">
@@ -15,6 +21,10 @@ function Search() {
                     />
                 </div>
             </div>
+
+            {loading && !error && (<LoadingSpinner />)}
+            {error && (<ErrorMessage error={error} />)}
+
             <div className="search-books-results">
                 {!query && (
                     <div className="search-initial-container">
