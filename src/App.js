@@ -58,8 +58,6 @@ function App() {
 
   // Handle changing the shelf of a book
   const handleChangeShelf = useCallback((book, newShelf) => {
-    console.log("handleChangeShelf", "Title: ", book.title, ", Shelf: ", book.shelf, ", New Shelf: ", newShelf);
-
     // Update book's shelf via API
     BooksAPI.update(book, newShelf).then(() => {
       // Update book's shelf in local state
@@ -78,8 +76,6 @@ function App() {
           return [...prevBooks, { ...book, shelf: newShelf }];
         }
       });
-
-      console.log("books", book, book.shelf);
     });
   }, []);
 
