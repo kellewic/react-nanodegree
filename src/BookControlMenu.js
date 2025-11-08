@@ -11,7 +11,7 @@ const BookControlMenu = ({ book }) => {
 
     return (
         <div className="book-shelf-changer">
-            <select value={book.shelf || "none"} onChange={(e) => handleChangeShelf(book, e.target.value)}>
+            <select value={book.shelf || SHELVES.NONE} onChange={(e) => handleChangeShelf(book, e.target.value)}>
                 <option value="move" disabled>Move to...</option>
                 {book?.shelf &&
                     <option className="book-shelf-changer-remove" value={SHELVES.REMOVE}>Remove from shelf</option>
