@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import BookShelf from "./BookShelf";
 import { BookshelvesContext } from "./BookshelvesContext";
@@ -85,6 +86,10 @@ function App() {
           </div>
         </BookshelvesContext>
       )}
+
+      <div className="open-search">
+        <Link to="/search" title="Search for books" aria-label="Search for books">Search</Link>
+      </div>
     </div>
   );
 }
