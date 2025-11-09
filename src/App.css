@@ -96,7 +96,9 @@ body,
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   font-size: 0;
 }
 
@@ -109,7 +111,9 @@ body,
   left: 0;
   z-index: 5;
   display: flex;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 0 6px rgba(0, 0, 0, 0.23);
 }
 .search-books-input-wrapper {
   flex: 1;
@@ -123,7 +127,14 @@ body,
   outline: none;
 }
 
-.close-search {
+.close-search-fixed {
+  position: fixed;
+  top: 20px;
+  left: 15px;
+}
+
+.close-search a,
+.close-search-fixed a {
   display: block;
   top: 20px;
   left: 15px;
@@ -196,7 +207,9 @@ body,
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
 }
 .book-shelf-changer select {
   width: 100%;
@@ -208,11 +221,173 @@ body,
 /* book cover */
 
 .book-cover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   background: #eee;
 }
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/** Book details **/
+
+.details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.details-book-header {
+  margin-bottom: 50px;
+}
+
+.details-book-title {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 0;
+  color: #505050;
+}
+
+.details-book-subtitle {
+  font-size: 1.8rem;
+  font-weight: normal;
+  color: #b0b0b0;
+  margin-bottom: 20px;
+}
+
+.details-book-author {
+  font-size: 1rem;
+  color: #a0a0a0;
+}
+
+/* Wrapper for side-by-side layout */
+.details-content-wrapper {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.details-book-cover {
+  flex-shrink: 0;
+}
+
+.details-book-cover img {
+  width: 200px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-book-details {
+  background-color: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 30px;
+  flex: 1;
+}
+
+.details-grid {
+  margin-bottom: 30px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+.detail-item {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-label {
+  color: #3a3a3a;
+  min-width: 90px;
+}
+
+.detail-value {
+  color: #505050;
+}
+
+.details-book-description {
+  padding-top: 30px;
+  border-top: 1px solid #3a3a3a;
+  white-space: pre-line;
+  line-height: 1.7;
+  max-width: 65ch;
+  text-align: justify;
+  color: #404040;
+  font-size: 1rem;
+  position: relative;
+}
+
+/*
+Long description collapse and toggle button.
+
+  References:
+  - https://css-tricks.com/text-fade-read-more/
+*/
+.description-collapsed {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.description-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #f0f0f0);
+  pointer-events: none;
+}
+
+.description-toggle-btn {
+  background: none;
+  border: 1px solid #2e7c31;
+  color: #2e7c31;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.description-toggle-btn:hover {
+  background: #2e7c31;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .details-book-title {
+    font-size: 2rem;
+  }
+
+  .details-book-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .details-detail-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Mobile responsive - stack vertically on small screens */
+@media (max-width: 768px) {
+  .details-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Override cursor for read-only ratings */
+.rating-readonly,
+.rating-readonly * {
+  cursor: default !important;
 }

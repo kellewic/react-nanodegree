@@ -5,6 +5,7 @@ import { AppContext } from "./AppContext";
 import { SHELVES, SHELF_CONFIG, BookshelvesContext } from "./BookshelvesContext";
 import Home from "./Home";
 import Search from "./Search";
+import BookDetails from "./BookDetails";
 import "./App.css";
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/books/:id" element={<BookDetails />} />
         </Routes>
       </BookshelvesContext>
     </AppContext>

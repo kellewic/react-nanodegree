@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import { BookshelvesContext } from "./BookshelvesContext";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
+import HomeLink from "./HomeLink";
 
 /**
  * Debouncing took a bit to figure out.
@@ -94,7 +94,7 @@ function Search() {
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <Link className="close-search" to="/" title="Back to home" aria-label="Back to home">Home</Link>
+                <HomeLink />
                 <div className="search-books-input-wrapper">
                     <input type="text" autoFocus placeholder="Search by title"
                         value={inputValue}

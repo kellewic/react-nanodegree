@@ -30,6 +30,15 @@ export const SHELF_CONFIG = [
     },
 ];
 
+/**
+ * Get the title of a shelf from its ID
+ * @param {string} shelfId - Shelf ID
+ * @returns {string} Shelf title
+ */
+export const getShelfTitle = (shelfId) => {
+    return SHELF_CONFIG.find((shelf) => shelf.id === shelfId)?.title || "None";
+}
+
 export const BookshelvesContext = createContext({
     books: [],
     bookshelves: [],
