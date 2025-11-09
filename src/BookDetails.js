@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { getLanguageName } from "./utils/languages";
-import LoadingSpinner from "./LoadingSpinner";
-import ErrorMessage from "./ErrorMessage";
-import { AppContext } from "./AppContext";
-import { getShelfTitle, BookshelvesContext } from "./BookshelvesContext";
-import HomeLink from "./HomeLink";
 import { StarRating } from 'react-flexible-star-rating';
+import { getLanguageName } from "./utils/languages";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorMessage from "./components/ErrorMessage";
+import { AppContext } from "./context/AppContext";
+import { getShelfTitle, BookshelvesContext } from "./context/BookshelvesContext";
+import HomeLink from "./components/HomeLink";
+import BookCoverImage from "./components/BookCoverImage";
 
 function BookDetails() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -53,10 +54,7 @@ function BookDetails() {
 
             <div className="details-content-wrapper">
                 <div className="details-book-cover">
-                    <img
-                        src={book.imageLinks?.thumbnail || book.imageLinks?.smallThumbnail}
-                        alt={`Cover of ${book.title}`}
-                    />
+                    <BookCoverImage book={book} />
                 </div>
 
                 <section className="details-book-details">

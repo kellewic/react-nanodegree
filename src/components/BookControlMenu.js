@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { SHELVES, BookshelvesContext } from "./BookshelvesContext";
+import { SHELVES, BookshelvesContext } from "../context/BookshelvesContext";
 
 /**
  * Displays control menu to move book to a different shelf

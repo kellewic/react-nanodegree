@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import BookCover from "./BookCover";
 import BookControlMenu from "./BookControlMenu";
 
 /**
@@ -12,16 +12,7 @@ const Book = ({ book }) => {
     return (
         <div className="book">
             <div className="book-top">
-                <Link to={`/books/${book.id}`} state={{ book }} title="View book details" className="book-cover-link">
-                    <div className="book-cover"
-                        style={{
-                            width: 128,
-                            height: 193,
-                            backgroundImage: book.imageLinks?.thumbnail ?
-                                `url(${book.imageLinks?.thumbnail})` :
-                                "none"
-                        }}></div>
-                </Link>
+                <BookCover book={book} />
                 <BookControlMenu book={book} />
             </div>
             <div className="book-title">{bookTitle}</div>

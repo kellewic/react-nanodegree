@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect, useMemo } from "react";
-import { AppContext } from "./AppContext";
-import { BookshelvesContext } from "./BookshelvesContext";
-import LoadingSpinner from "./LoadingSpinner";
-import ErrorMessage from "./ErrorMessage";
-import * as BooksAPI from "./BooksAPI";
-import Book from "./Book";
-import HomeLink from "./HomeLink";
+import { AppContext } from "./context/AppContext";
+import { BookshelvesContext } from "./context/BookshelvesContext";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorMessage from "./components/ErrorMessage";
+import * as BooksAPI from "./utils/BooksAPI";
+import Book from "./components/Book";
+import HomeLink from "./components/HomeLink";
 
 /**
  * Debouncing took a bit to figure out.

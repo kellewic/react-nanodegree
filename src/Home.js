@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "./AppContext";
-import { BookshelvesContext } from "./BookshelvesContext";
-import LoadingSpinner from "./LoadingSpinner";
-import ErrorMessage from "./ErrorMessage";
-import BookShelf from "./BookShelf";
+import { AppContext } from "./context/AppContext";
+import { BookshelvesContext } from "./context/BookshelvesContext";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorMessage from "./components/ErrorMessage";
+import BookShelf from "./components/BookShelf";
 
 function Home() {
     const { loading, error } = useContext(AppContext);

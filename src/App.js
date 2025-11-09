@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
-import * as BooksAPI from "./BooksAPI";
-import { AppContext } from "./AppContext";
-import { SHELVES, SHELF_CONFIG, BookshelvesContext } from "./BookshelvesContext";
+import * as BooksAPI from "./utils/BooksAPI";
+import { AppContext } from "./context/AppContext";
+import { SHELVES, SHELF_CONFIG, BookshelvesContext } from "./context/BookshelvesContext";
 import Home from "./Home";
 import Search from "./Search";
 import BookDetails from "./BookDetails";
