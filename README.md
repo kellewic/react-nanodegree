@@ -1,6 +1,6 @@
 # MyReads - Book Tracking App
 
-A bookshelf application that allows you to organize books into three categories: Currently Reading, Want to Read, and Read. Built as part of the [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019) program final project.
+A bookshelf application that allows you to organize books into three categories: Currently Reading, Want to Read, and Read. Built as part of the [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019) program.
 
 ## Overview
 
@@ -23,7 +23,7 @@ MyReads provides an intuitive interface to manage your reading list. Search for 
 
 ```
 git clone <repository-url>
-cd react-nanodegree
+cd react-nanodegree-project1
 ```
 
 **Install dependencies**
